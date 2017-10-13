@@ -57,6 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201710131342346_InitialMigration.cs" />
+    <Compile Include="Migrations\201710131342346_InitialMigration.Designer.cs">
+      <DependentUpon>201710131342346_InitialMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverbDbContext.cs" />
@@ -70,6 +74,11 @@
       <Project>{0187F7A9-3F65-4BD0-865F-22C029356C89}</Project>
       <Name>Reverb.Data.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710131342346_InitialMigration.resx">
+      <DependentUpon>201710131342346_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,6 +12,8 @@ namespace Reverb.Services
 
         public SongService(IEfContextWrapper<Song> songsRepo, ISaveContext context)
         {
+            // TODO: Add validation for dependancies
+
             this.songsRepo = songsRepo;
             this.context = context;
         }

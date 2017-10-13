@@ -202,7 +202,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -278,6 +277,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reverb.Data.Models\Reverb.Data.Models.csproj">
+      <Project>{0187F7A9-3F65-4BD0-865F-22C029356C89}</Project>
+      <Name>Reverb.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reverb.Data\Reverb.Data.csproj">
+      <Project>{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}</Project>
+      <Name>Reverb.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

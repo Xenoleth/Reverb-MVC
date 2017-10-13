@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverb.Web", "Reverb.Web\Reverb.Web.csproj", "{15DEFCDD-E846-421F-9A06-CD1D53D42E8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverb.Data", "Reverb.Data\Reverb.Data.csproj", "{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverb.Data.Models", "Reverb.Data.Models\Reverb.Data.Models.csproj", "{0187F7A9-3F65-4BD0-865F-22C029356C89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverb.Services", "Reverb.Services\Reverb.Services.csproj", "{BBF58DD5-44BA-4537-B2D5-C66B2B8BD78A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{15DEFCDD-E846-421F-9A06-CD1D53D42E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15DEFCDD-E846-421F-9A06-CD1D53D42E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15DEFCDD-E846-421F-9A06-CD1D53D42E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0187F7A9-3F65-4BD0-865F-22C029356C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0187F7A9-3F65-4BD0-865F-22C029356C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0187F7A9-3F65-4BD0-865F-22C029356C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0187F7A9-3F65-4BD0-865F-22C029356C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF58DD5-44BA-4537-B2D5-C66B2B8BD78A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF58DD5-44BA-4537-B2D5-C66B2B8BD78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF58DD5-44BA-4537-B2D5-C66B2B8BD78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF58DD5-44BA-4537-B2D5-C66B2B8BD78A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

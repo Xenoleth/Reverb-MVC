@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace Reverb.Data.Repositories
 {
-    public class EfRepository<T> : IEfRepository<T>
+    public class EfWrapper<T> : IEfWrapper<T>
         where T : class, IDeletable
     {
         private readonly IReverbDbContext context;
 
-        public EfRepository(IReverbDbContext context)
+        public EfWrapper(IReverbDbContext context)
         {
             this.context = context;
         }

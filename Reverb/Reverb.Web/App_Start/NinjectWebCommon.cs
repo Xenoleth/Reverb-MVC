@@ -74,7 +74,7 @@ namespace Reverb.Web.App_Start
             //});
 
             kernel.Bind<DbContext, IReverbDbContext>().To<ReverbDbContext>().InRequestScope();
-            kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
+            kernel.Bind(typeof(IEfWrapper<>)).To(typeof(EfWrapper<>));
         }        
     }
 }

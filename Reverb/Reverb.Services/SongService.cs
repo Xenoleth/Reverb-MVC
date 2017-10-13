@@ -8,10 +8,12 @@ namespace Reverb.Services
     public class SongService : ISongService
     {
         private readonly IEfContextWrapper<Song> songsRepo;
+        private readonly ISaveContext context;
 
-        public SongService(IEfContextWrapper<Song> songsRepo)
+        public SongService(IEfContextWrapper<Song> songsRepo, ISaveContext context)
         {
             this.songsRepo = songsRepo;
+            this.context = context;
         }
 
         public IQueryable<Song> GetSongs()
@@ -22,7 +24,7 @@ namespace Reverb.Services
         public void Update(Song song)
         {
             this.songsRepo.Update(song);
-            this.songsRepo.
+            this.context.SaveChanges();
         }
     }
 }

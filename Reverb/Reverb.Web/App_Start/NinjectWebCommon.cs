@@ -15,6 +15,9 @@ namespace Reverb.Web.App_Start
     using Data;
     using System.Data.Entity;
     using Data.Repositories;
+    using Services.Contracts;
+    using Services;
+    using Data.SaveChanges;
 
     public static class NinjectWebCommon 
     {
@@ -75,6 +78,9 @@ namespace Reverb.Web.App_Start
 
             kernel.Bind<DbContext, IReverbDbContext>().To<ReverbDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfContextWrapper<>)).To(typeof(EfContextWrapper<>));
+            kernel.Bind<ISaveContext>().To<SaveContext>().InRequestScope();
+            
+            kernel.Bind<ISongService>().To<SongService>().InRequestScope();
         }        
     }
 }

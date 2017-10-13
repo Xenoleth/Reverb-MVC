@@ -21,7 +21,5 @@ namespace Reverb.Data.Contracts
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
-
-        // TODO: Set<>, Entry<> to use interface propperly
     }
 }

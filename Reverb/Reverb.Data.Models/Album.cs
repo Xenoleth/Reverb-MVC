@@ -1,5 +1,6 @@
 ﻿using Reverb.Data.Models.Abstracts;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Reverb.Data.Models
 {
@@ -12,6 +13,7 @@ namespace Reverb.Data.Models
             this.songs = new HashSet<Song>();
         }
 
+        [Required]
         public string Title { get; set; }
 
         public virtual Artist Artist { get; set; }

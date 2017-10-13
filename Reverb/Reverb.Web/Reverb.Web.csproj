@@ -308,6 +308,10 @@
       <Project>{090F6FF0-1393-4FCC-A5E2-A8360AA7FF8D}</Project>
       <Name>Reverb.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Reverb.Services\Reverb.Services.csproj">
+      <Project>{BBF58DD5-44BA-4537-B2D5-C66B2B8BD78A}</Project>
+      <Name>Reverb.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

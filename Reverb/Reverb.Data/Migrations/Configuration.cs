@@ -22,6 +22,48 @@ namespace Reverb.Data.Migrations
                 // TODO: Seed database with music    
 
                 this.SeedAdmin(context);
+                this.SeedSongs(context);
+        }
+
+        private void SeedSongs(ReverbDbContext context)
+        {
+            const string artistName = "Pesho";
+            const string albumTitle = "Album title";
+            const string songTitle = "Song";
+            const string songLyrics = "Lyrics";
+
+            if (!context.Songs.Any())
+            {
+                var artist = new Artist()
+                {
+                    Name = artistName
+                };
+
+                context.Artists.Add(artist);
+
+                var album = new Album()
+                {
+                    Title = albumTitle,
+                    Artist = artist
+                };
+
+                context.Albums.Add(album);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    var song = new Song()
+                    {
+                        Title = songTitle + i,
+                        Artist = artist,
+                        Album = album,
+                        Lyrics = songLyrics
+                    };
+
+                    context.Songs.Add(song);
+                }
+
+                context.SaveChanges();
+            }
         }
 
         private void SeedAdmin(ReverbDbContext context)

@@ -10,6 +10,12 @@ namespace Reverb.Data.Contracts
     {
         IDbSet<Song> Songs { get; set; }
 
+        IDbSet<Album> Albums { get; set; }
+
+        IDbSet<Artist> Artists { get; set; }
+
+        IDbSet<Genre> Genres { get; set; }
+
         int SaveChanges();
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;

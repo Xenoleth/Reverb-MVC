@@ -63,6 +63,18 @@
     <Compile Include="Migrations\201710131539064_Initial.Designer.cs">
       <DependentUpon>201710131539064_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131855502_SongModels.cs" />
+    <Compile Include="Migrations\201710131855502_SongModels.Designer.cs">
+      <DependentUpon>201710131855502_SongModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131904501_AddConnections.cs" />
+    <Compile Include="Migrations\201710131904501_AddConnections.Designer.cs">
+      <DependentUpon>201710131904501_AddConnections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131938566_AddFavoritesToUser.cs" />
+    <Compile Include="Migrations\201710131938566_AddFavoritesToUser.Designer.cs">
+      <DependentUpon>201710131938566_AddFavoritesToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EfContextWrapper.cs" />
@@ -81,6 +93,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710131539064_Initial.resx">
       <DependentUpon>201710131539064_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131855502_SongModels.resx">
+      <DependentUpon>201710131855502_SongModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131904501_AddConnections.resx">
+      <DependentUpon>201710131904501_AddConnections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131938566_AddFavoritesToUser.resx">
+      <DependentUpon>201710131938566_AddFavoritesToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -58,8 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\BaseModel.cs" />
+    <Compile Include="Album.cs" />
+    <Compile Include="Artist.cs" />
     <Compile Include="Contracts\IDeletable.cs" />
     <Compile Include="Contracts\IModifiable.cs" />
+    <Compile Include="Genre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Song.cs" />
     <Compile Include="User.cs" />

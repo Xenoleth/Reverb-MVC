@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Reverb.Data.Models.Contracts;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
@@ -11,6 +12,26 @@ namespace Reverb.Data.Models
 {
     public class User : IdentityUser, IDeletable, IModifiable
     {
+        private ICollection<Song> favoriteSongs;
+
+        public User()
+        {
+            this.favoriteSongs = new HashSet<Song>();
+        }
+
+        public ICollection<Song> FavoriteSongs
+        {
+            get
+            {
+                return this.favoriteSongs;
+            }
+
+            set
+            {
+                this.favoriteSongs = value;
+            }
+        }
+
         [Index]
         public bool IsDeleted { get; set; }
 

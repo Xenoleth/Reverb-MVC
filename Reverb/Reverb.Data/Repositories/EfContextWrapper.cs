@@ -66,11 +66,5 @@ namespace Reverb.Data.Repositories
 
             entry.State = EntityState.Modified;
         }
-
-        // TODO: Extract save changes in UnitOfWork
-        public void SaveChanges()
-        {
-            this.context.SaveChanges();
-        }
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Reverb.Data.Contracts
 {
-    public interface IEfWrapper<T> where T : class, IDeletable
+    public interface IEfContextWrapper<T> where T : class, IDeletable
     {
         IQueryable<T> All { get; }
         IQueryable<T> AllAndDeleted { get; }

@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace Reverb.Data.Repositories
 {
-    public class EfWrapper<T> : IEfWrapper<T>
+    public class EfContextWrapper<T> : IEfContextWrapper<T>
         where T : class, IDeletable
     {
         private readonly IReverbDbContext context;
 
-        public EfWrapper(IReverbDbContext context)
+        public EfContextWrapper(IReverbDbContext context)
         {
             this.context = context;
         }
@@ -65,6 +65,12 @@ namespace Reverb.Data.Repositories
             }
 
             entry.State = EntityState.Modified;
+        }
+
+        // TODO: Extract save changes in UnitOfWork
+        public void SaveChanges()
+        {
+            this.context.SaveChanges();
         }
     }
 }

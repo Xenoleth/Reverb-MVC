@@ -1,11 +1,14 @@
 namespace Reverb.Data.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<Reverb.Data.ReverbDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<ReverbDbContext>
     {
         public Configuration()
         {
@@ -13,20 +16,30 @@ namespace Reverb.Data.Migrations
             this.AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(Reverb.Data.ReverbDbContext context)
+        protected override void Seed(ReverbDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            this.SeedAdmin(context);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        private void SeedAdmin(ReverbDbContext context)
+        {
+            const string AdminUserName = "admin@mail.bg";
+            const string AdminPassword = "1234";
+
+            if (context.Roles.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole { Name = "Admin" };
+                roleManager.Create(role);
+
+                var userStore = new UserStore<User>(context);
+                var userManager = new UserManager<User>(userStore);
+                var user = new User { UserName = AdminUserName, Email = AdminUserName, EmailConfirmed = true };
+
+                userManager.Create(user, AdminPassword);
+                userManager.AddToRole(user.Id, "Admin");
+            }            
         }
     }
 }

@@ -1,5 +1,5 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Reverb.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Reverb.Web.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Reverb.Web.App_Start.NinjectConfiguration), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Reverb.Web.App_Start.NinjectConfiguration), "Stop")]
 
 namespace Reverb.Web.App_Start
 {
@@ -19,7 +19,7 @@ namespace Reverb.Web.App_Start
     using Services;
     using Data.SaveChanges;
 
-    public static class NinjectWebCommon 
+    public static class NinjectConfiguration
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 

@@ -1,0 +1,7 @@
+﻿@using Reverb.Web.Models.Song
+@model ICollection<SongViewModel>
+
+@foreach (var song in Model)
+{
+    @Html.Partial("_SongPartial", song);
+}

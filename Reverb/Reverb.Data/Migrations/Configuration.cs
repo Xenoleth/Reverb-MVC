@@ -18,15 +18,17 @@ namespace Reverb.Data.Migrations
 
         protected override void Seed(ReverbDbContext context)
         {
-            this.SeedAdmin(context);
+                // TODO: Seed database with music    
+
+                this.SeedAdmin(context);
         }
 
         private void SeedAdmin(ReverbDbContext context)
         {
             const string AdminUserName = "admin@mail.bg";
-            const string AdminPassword = "1234";
+            const string AdminPassword = "asdasd";
 
-            if (context.Roles.Any())
+            if (!context.Roles.Any())
             {
                 var roleStore = new RoleStore<IdentityRole>(context);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -35,7 +37,13 @@ namespace Reverb.Data.Migrations
 
                 var userStore = new UserStore<User>(context);
                 var userManager = new UserManager<User>(userStore);
-                var user = new User { UserName = AdminUserName, Email = AdminUserName, EmailConfirmed = true };
+                var user = new User
+                {
+                    UserName = AdminUserName,
+                    Email = AdminUserName,
+                    EmailConfirmed = true,
+                    CreatedOn = DateTime.Now
+                };
 
                 userManager.Create(user, AdminPassword);
                 userManager.AddToRole(user.Id, "Admin");

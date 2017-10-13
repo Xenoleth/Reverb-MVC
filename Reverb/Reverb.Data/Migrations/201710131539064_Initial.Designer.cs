@@ -13,7 +13,7 @@ namespace Reverb.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710131427139_Initial"; }
+            get { return "201710131539064_Initial"; }
         }
         
         string IMigrationMetadata.Source

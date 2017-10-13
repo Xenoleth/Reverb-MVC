@@ -10,9 +10,11 @@ namespace Reverb.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Extensions.Conventions;
     using Data.Contracts;
     using Data;
     using System.Data.Entity;
+    using Data.Repositories;
 
     public static class NinjectWebCommon 
     {
@@ -64,8 +66,15 @@ namespace Reverb.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<DbContext, ReverbDbContext>().To<ReverbDbContext>().InRequestScope();
-            kernel.Bind<IReverbDbContext>().To<ReverbDbContext>().InRequestScope();
+            //kernel.Bind(x =>
+            //{
+            //    x.FromThisAssembly()
+            //        .SelectAllClasses()
+            //        .BindDefaultInterface();
+            //});
+
+            kernel.Bind<DbContext, IReverbDbContext>().To<ReverbDbContext>().InRequestScope();
+            kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
         }        
     }
 }

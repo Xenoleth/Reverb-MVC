@@ -1,4 +1,5 @@
-﻿using Reverb.Data.Contracts;
+﻿using Bytes2you.Validation;
+using Reverb.Data.Contracts;
 using Reverb.Data.Models;
 using Reverb.Services.Contracts;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace Reverb.Services
 
         public SongService(IEfContextWrapper<Song> songsRepo, ISaveContext context)
         {
-            // TODO: Add validation for dependancies
+            Guard.WhenArgument(songsRepo, "songRepo").IsNull().Throw();
+            Guard.WhenArgument(context, "context").IsNull().Throw();
 
             this.songsRepo = songsRepo;
             this.context = context;

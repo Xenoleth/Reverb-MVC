@@ -60,25 +60,9 @@
     <Compile Include="Contracts\IEfContextWrapper.cs" />
     <Compile Include="Contracts\IReverbDbContext.cs" />
     <Compile Include="Contracts\ISaveContext.cs" />
-    <Compile Include="Migrations\201710131539064_Initial.cs" />
-    <Compile Include="Migrations\201710131539064_Initial.Designer.cs">
-      <DependentUpon>201710131539064_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710131855502_SongModels.cs" />
-    <Compile Include="Migrations\201710131855502_SongModels.Designer.cs">
-      <DependentUpon>201710131855502_SongModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710131904501_AddConnections.cs" />
-    <Compile Include="Migrations\201710131904501_AddConnections.Designer.cs">
-      <DependentUpon>201710131904501_AddConnections.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710131938566_AddFavoritesToUser.cs" />
-    <Compile Include="Migrations\201710131938566_AddFavoritesToUser.Designer.cs">
-      <DependentUpon>201710131938566_AddFavoritesToUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710132047026_AddRestrictions.cs" />
-    <Compile Include="Migrations\201710132047026_AddRestrictions.Designer.cs">
-      <DependentUpon>201710132047026_AddRestrictions.cs</DependentUpon>
+    <Compile Include="Migrations\201710141718075_InitialCreate.cs" />
+    <Compile Include="Migrations\201710141718075_InitialCreate.Designer.cs">
+      <DependentUpon>201710141718075_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,20 +81,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710131539064_Initial.resx">
-      <DependentUpon>201710131539064_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710131855502_SongModels.resx">
-      <DependentUpon>201710131855502_SongModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710131904501_AddConnections.resx">
-      <DependentUpon>201710131904501_AddConnections.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710131938566_AddFavoritesToUser.resx">
-      <DependentUpon>201710131938566_AddFavoritesToUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710132047026_AddRestrictions.resx">
-      <DependentUpon>201710132047026_AddRestrictions.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710141718075_InitialCreate.resx">
+      <DependentUpon>201710141718075_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

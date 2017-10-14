@@ -1,7 +1,11 @@
-﻿namespace Reverb.Web.Models.Song
+﻿using System;
+
+namespace Reverb.Web.Models.Song
 {
     public class SongViewModel
     {
+        public Guid? Id { get; set; }
+
         public string Title { get; set; }
 
         public string Album { get; set; }

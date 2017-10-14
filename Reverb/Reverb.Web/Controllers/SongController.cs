@@ -1,5 +1,6 @@
 ﻿using Reverb.Services.Contracts;
 using Reverb.Web.Models.Song;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -8,10 +9,12 @@ namespace Reverb.Web.Controllers
     public class SongController : Controller
     {
         private readonly ISongService songService;
+        private readonly IUserService userService;
 
-        public SongController(ISongService songService)
+        public SongController(ISongService songService, IUserService userService)
         {
             this.songService = songService;
+            this.userService = userService;
         }
 
         // GET: Song
@@ -21,6 +24,7 @@ namespace Reverb.Web.Controllers
                 .GetSongs()
                 .Select(x => new SongViewModel
                 {
+                    Id = x.Id,
                     Title = x.Title,
                     Artist = x.Artist.Name,
                     Album = x.Album.Title,
@@ -66,6 +70,7 @@ namespace Reverb.Web.Controllers
             var data = songs
              .Select(x => new SongViewModel
              {
+                 Id = x.Id,
                  Title = x.Title,
                  Artist = x.Artist.Name,
                  Album = x.Album.Title,
@@ -75,6 +80,33 @@ namespace Reverb.Web.Controllers
 
 
             return View("Library", data);
+        }
+
+        [HttpPost]
+        public ActionResult AddToFavorites(Guid songId)
+        {
+            var song = this.songService
+                .GetSongs()
+                .Where(x => x.Id == songId)
+                .SingleOrDefault();
+
+            this.userService
+                .AddFavoriteSong(song, User.Identity.Name);
+
+            // Do this with AJAX to not reload page
+            var songs = this.songService
+                .GetSongs()
+                .Select(x => new SongViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Artist = x.Artist.Name,
+                    Album = x.Album.Title,
+                    Lyrics = x.Lyrics
+                })
+                .ToList();
+
+            return View("Library", songs);
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Reverb.Data.Migrations
 
         protected override void Seed(ReverbDbContext context)
         {
-                // TODO: Seed database with music    
+            // TODO: Seed database with music    
 
-                this.SeedAdmin(context);
-                this.SeedSongs(context);
+            this.SeedAdmin(context);
+            this.SeedSongs(context);
         }
 
         private void SeedSongs(ReverbDbContext context)
@@ -90,7 +90,7 @@ namespace Reverb.Data.Migrations
 
                 userManager.Create(user, AdminPassword);
                 userManager.AddToRole(user.Id, "Admin");
-            }            
+            }
         }
     }
 }

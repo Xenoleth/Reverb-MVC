@@ -9,4 +9,9 @@
     <p>@Model.Album</p>
     <p>@Model.Artist</p>
     <p>@Model.Lyrics</p>
+
+    @using (Html.BeginForm("AddToFavorites", "Song", new { songId = Model.Id }, FormMethod.Post))
+    {
+        <input type="submit" value="Favorite" />
+    }
 </div>

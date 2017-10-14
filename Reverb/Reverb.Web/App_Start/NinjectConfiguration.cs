@@ -81,6 +81,7 @@ namespace Reverb.Web.App_Start
             kernel.Bind<ISaveContext>().To<SaveContext>().InRequestScope();
             
             kernel.Bind<ISongService>().To<SongService>().InRequestScope();
+            kernel.Bind<IUserService>().To<UserService>().InRequestScope();
         }        
     }
 }

@@ -19,7 +19,7 @@ namespace Reverb.Data.Models
             this.favoriteSongs = new HashSet<Song>();
         }
 
-        public ICollection<Song> FavoriteSongs
+        public virtual ICollection<Song> FavoriteSongs
         {
             get
             {

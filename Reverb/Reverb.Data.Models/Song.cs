@@ -8,10 +8,12 @@ namespace Reverb.Data.Models
     public class Song : BaseModel
     {
         private ICollection<Genre> genres;
+        private ICollection<User> favoritedBy;
 
         public Song()
         {
             this.genres = new HashSet<Genre>();
+            this.favoritedBy = new HashSet<User>();
         }
 
         [Required]
@@ -21,7 +23,6 @@ namespace Reverb.Data.Models
 
         public virtual Album Album { get; set; }
 
-        [Required]
         public virtual Artist Artist { get; set; }
 
         public int? Duration { get; set; }
@@ -41,5 +42,18 @@ namespace Reverb.Data.Models
 
         [Column(TypeName = "ntext")]
         public string Lyrics { get; set; }
+
+        public virtual ICollection<User> FavoritedBy
+        {
+            get
+            {
+                return this.favoritedBy;
+            }
+
+            set
+            {
+                this.favoritedBy = value;
+            }
+        }
     }
 }

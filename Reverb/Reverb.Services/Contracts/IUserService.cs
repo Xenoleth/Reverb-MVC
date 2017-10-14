@@ -8,5 +8,7 @@ namespace Reverb.Services.Contracts
         IQueryable<User> GetUsers();
 
         void AddFavoriteSong(Song song, string email);
+
+        void RemoveFavoriteSong(Song song, string email);
     }
 }

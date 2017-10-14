@@ -28,8 +28,10 @@ namespace Reverb.Web.Controllers
                     Title = x.Title,
                     Artist = x.Artist.Name,
                     Album = x.Album.Title,
-                    Lyrics = x.Lyrics
+                    Lyrics = x.Lyrics,
+                    Users = x.FavoritedBy.Select(u => u.Email)
                 })
+                .OrderBy(x => x.Title)
                 .ToList();
 
             return View(songs);
@@ -74,7 +76,8 @@ namespace Reverb.Web.Controllers
                  Title = x.Title,
                  Artist = x.Artist.Name,
                  Album = x.Album.Title,
-                 Lyrics = x.Lyrics
+                 Lyrics = x.Lyrics,
+                 Users = x.FavoritedBy.Select(u => u.Email)
              })
              .ToList();
 
@@ -90,23 +93,59 @@ namespace Reverb.Web.Controllers
                 .Where(x => x.Id == songId)
                 .SingleOrDefault();
 
-            this.userService
-                .AddFavoriteSong(song, User.Identity.Name);
+            this.userService.AddFavoriteSong(song, User.Identity.Name);
 
-            // Do this with AJAX to not reload page
-            var songs = this.songService
+            return this.RedirectToAction("Library");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveFromFavorites(Guid songId)
+        {
+            var song = this.songService
                 .GetSongs()
-                .Select(x => new SongViewModel
+                .Where(x => x.Id == songId)
+                .SingleOrDefault();
+
+            this.userService.RemoveFavoriteSong(song, User.Identity.Name);
+
+            return this.RedirectToAction("Library");
+        }
+
+        [HttpGet]
+        public ActionResult EditSong(Guid songId)
+        {
+            var song = this.songService
+                .GetSongs()
+                .Where(x => x.Id == songId)
+                .Select(x => new SongViewModel()
                 {
                     Id = x.Id,
                     Title = x.Title,
                     Artist = x.Artist.Name,
                     Album = x.Album.Title,
-                    Lyrics = x.Lyrics
+                    Lyrics = x.Lyrics,
+                    Users = x.FavoritedBy.Select(u => u.Email)
                 })
-                .ToList();
+                .SingleOrDefault();
 
-            return View("Library", songs);
+            return View(song);
+        }
+
+        [HttpPost]
+        public ActionResult EditSong(SongViewModel songModel)
+        {
+            var song = this.songService
+                .GetSongs()
+                .Where(x => x.Id == songModel.Id)
+                .SingleOrDefault();
+
+            // TODO: Decide if here or in service
+            song.Title = songModel.Title;
+            // TODO: Change the rest of the song parameters
+
+            this.songService.Update(song);
+
+            return this.RedirectToAction("Library");
         }
     }
 }

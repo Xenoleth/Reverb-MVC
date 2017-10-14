@@ -1,0 +1,18 @@
+﻿@using Reverb.Web.Models.Song
+@model SongViewModel
+
+@using (Html.BeginForm("EditSong", "Song", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.EditorFor(x => Model.Title)
+    <br />
+    @Html.EditorFor(x => Model.Album)
+    <br />
+    @Html.EditorFor(x => Model.Artist)
+    <br />
+    @Html.EditorFor(x => Model.Lyrics)
+    <br />
+    @Html.HiddenFor(x => x.Users)
+
+    <input type="submit" class="btn btn-success" value="Save" />
+}

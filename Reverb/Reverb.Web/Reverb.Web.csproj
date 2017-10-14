@@ -293,6 +293,8 @@
     <Content Include="Views\Song\Library.cshtml" />
     <Content Include="Views\Shared\_SongPartial.cshtml" />
     <Content Include="Views\Shared\_SongSearchPartial.cshtml" />
+    <Content Include="Views\Shared\_EmptyPartial.cshtml" />
+    <Content Include="Views\Song\EditSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

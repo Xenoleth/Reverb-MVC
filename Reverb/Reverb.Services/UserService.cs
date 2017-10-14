@@ -25,7 +25,7 @@ namespace Reverb.Services
             return this.usersRepo.All;
         }
 
-        public void AddFavoriteSong (Song song, string email)
+        public void AddFavoriteSong(Song song, string email)
         {
             var user = this.usersRepo
                 .All
@@ -33,6 +33,18 @@ namespace Reverb.Services
                 .SingleOrDefault();
 
             user.FavoriteSongs.Add(song);  
+
+            context.SaveChanges();
+        }
+
+        public void RemoveFavoriteSong(Song song, string email)
+        {
+            var user = this.usersRepo
+                .All
+                .Where(x => x.Email == email)
+                .SingleOrDefault();
+
+            user.FavoriteSongs.Remove(song);
 
             context.SaveChanges();
         }

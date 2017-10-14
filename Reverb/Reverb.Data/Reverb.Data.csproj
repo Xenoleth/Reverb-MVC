@@ -64,6 +64,14 @@
     <Compile Include="Migrations\201710141718075_InitialCreate.Designer.cs">
       <DependentUpon>201710141718075_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710142015305_AddUserCollectionInSongs.cs" />
+    <Compile Include="Migrations\201710142015305_AddUserCollectionInSongs.Designer.cs">
+      <DependentUpon>201710142015305_AddUserCollectionInSongs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710142334197_RemoveRequirementForArtistInSong.cs" />
+    <Compile Include="Migrations\201710142334197_RemoveRequirementForArtistInSong.Designer.cs">
+      <DependentUpon>201710142334197_RemoveRequirementForArtistInSong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EfContextWrapper.cs" />
@@ -83,6 +91,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710141718075_InitialCreate.resx">
       <DependentUpon>201710141718075_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710142015305_AddUserCollectionInSongs.resx">
+      <DependentUpon>201710142015305_AddUserCollectionInSongs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710142334197_RemoveRequirementForArtistInSong.resx">
+      <DependentUpon>201710142334197_RemoveRequirementForArtistInSong.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

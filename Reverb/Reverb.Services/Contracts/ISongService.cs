@@ -6,5 +6,7 @@ namespace Reverb.Services.Contracts
     public interface ISongService
     {
         IQueryable<Song> GetSongs();
+
+        void Update(Song song);
     }
 }

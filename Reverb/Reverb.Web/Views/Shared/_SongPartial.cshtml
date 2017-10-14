@@ -10,8 +10,42 @@
     <p>@Model.Artist</p>
     <p>@Model.Lyrics</p>
 
-    @using (Html.BeginForm("AddToFavorites", "Song", new { songId = Model.Id }, FormMethod.Post))
+    @if (!User.Identity.IsAuthenticated)
     {
-        <input type="submit" value="Favorite" />
+
     }
+    else if (!Model.Users.Contains(User.Identity.Name))
+    {
+        using (Ajax.BeginForm(
+                "AddToFavorites",
+                "Song",
+                new { songId = Model.Id },
+                new AjaxOptions
+                {
+                    HttpMethod = "POST"
+                }))
+        {
+            <input type="submit" class="btn btn-primary" value="Favorite" />
+        }
+    }
+    else if(Model.Users.Contains(User.Identity.Name))
+    {
+        using (Ajax.BeginForm(
+                        "RemoveFromFavorites",
+                        "Song",
+                        new { songId = Model.Id },
+                        new AjaxOptions
+                        {
+                            HttpMethod = "POST"
+                        }))
+        {
+            <input type="submit" class="btn btn-primary" value="Unfavorite" />
+        }
+    }
+
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "EditSong", "Song", new { songId = Model.Id }, new { @class = "btn btn-warning" })
+    }
+
 </div>

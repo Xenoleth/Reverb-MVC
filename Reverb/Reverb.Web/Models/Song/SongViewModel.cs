@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Reverb.Web.Models.Song
 {
@@ -13,5 +14,7 @@ namespace Reverb.Web.Models.Song
         public string Artist { get; set; }
 
         public string Lyrics { get; set; }
+
+        public IEnumerable<string> Users { get; set; }
     }
 }

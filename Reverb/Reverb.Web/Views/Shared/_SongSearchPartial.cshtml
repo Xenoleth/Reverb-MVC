@@ -1,0 +1,19 @@
+﻿@using Reverb.Web.Models.Song
+@model SongSearchViewModel
+
+@using (Html.BeginForm("SearchSong", "Song", FormMethod.Post))
+{
+    <p>Enter name</p>
+    @Html.EditorFor(x => x.SearchTerm)
+    <p>Search by</p>
+    @Html.DropDownListFor(x => x.SearchBy, new SelectList(new List<string>()
+    {
+        "Title",
+        "Album",
+        "Artist"
+    }))
+    <p>In descending order</p>
+    @Html.CheckBoxFor(x => x.IsDescending)
+
+    <input type="submit" value="Search" />
+}

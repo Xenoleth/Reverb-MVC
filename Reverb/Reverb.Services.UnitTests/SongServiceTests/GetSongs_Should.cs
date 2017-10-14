@@ -11,7 +11,7 @@ namespace Reverb.Services.UnitTests.SongServiceTests
     public class GetSongs_Should
     {
         [TestMethod]
-        public void CallPropertyAllOfSongRepoDependancy()
+        public void CallPropertyAllInContextWrapper()
         {
             // Arrange
             var repository = new Mock<IEfContextWrapper<Song>>();

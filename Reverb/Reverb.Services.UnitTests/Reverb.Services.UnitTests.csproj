@@ -37,6 +37,8 @@
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
       <Private>True</Private>
@@ -60,10 +62,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumServiceTests\Constructor_Should.cs" />
+    <Compile Include="AlbumServiceTests\GetAlbums_Should.cs" />
+    <Compile Include="AlbumServiceTests\Update_Should.cs" />
+    <Compile Include="ArtistServiceTests\Constructor_Should.cs" />
+    <Compile Include="ArtistServiceTests\GetArtists_Should.cs" />
+    <Compile Include="ArtistServiceTests\Update_Should.cs" />
+    <Compile Include="GenreServiceTests\Constructor_Should.cs" />
+    <Compile Include="GenreServiceTests\GetGenres_Should.cs" />
+    <Compile Include="GenreServiceTests\Update_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SongServiceTests\Constructor_Should.cs" />
     <Compile Include="SongServiceTests\GetSongs_Should.cs" />
     <Compile Include="SongServiceTests\Update_Should.cs" />
+    <Compile Include="UserServiceTests\AddFavoriteSong_Should.cs" />
+    <Compile Include="UserServiceTests\Constructor_Should.cs" />
+    <Compile Include="UserServiceTests\GetUsers_Should.cs" />
+    <Compile Include="UserServiceTests\RemoveFavoriteSong_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -85,6 +100,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

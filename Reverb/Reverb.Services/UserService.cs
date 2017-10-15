@@ -27,6 +27,9 @@ namespace Reverb.Services
 
         public void AddFavoriteSong(Song song, string email)
         {
+            Guard.WhenArgument(song, "song").IsNull().Throw();
+            Guard.WhenArgument(email, "email").IsNull().Throw();
+
             var user = this.usersRepo
                 .All
                 .Where(x => x.Email == email)
@@ -39,6 +42,9 @@ namespace Reverb.Services
 
         public void RemoveFavoriteSong(Song song, string email)
         {
+            Guard.WhenArgument(song, "song").IsNull().Throw();
+            Guard.WhenArgument(email, "email").IsNull().Throw();
+
             var user = this.usersRepo
                 .All
                 .Where(x => x.Email == email)

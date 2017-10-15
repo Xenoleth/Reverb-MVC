@@ -1,10 +1,12 @@
 ﻿@using Reverb.Web.Models.Song
 @model SongViewModel
 
-@*
-    TODO: Create better card for songs
+@* 
+    Render image as background
+    Render video
 *@
-<div class="card">
+
+<div class="details">
     <p>Title</p>
     <p><b>@Model.Title</b></p>
     <p>Album</p>
@@ -21,22 +23,6 @@
         <p>Unknown</p>
     }
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        using (Ajax.BeginForm(
-                "Details",
-                "Song",
-                new { songId = Model.Id },
-                new AjaxOptions
-                {
-                    HttpMethod = "POST"
-                }))
-        {
-            <input type="submit" class="btn btn-primary" value="Details" />
-        }
-    }
-
-    @* Fix random empty if by addind logic to the others with && *@
     @if (!User.Identity.IsAuthenticated)
     {
 
@@ -52,10 +38,10 @@
                     HttpMethod = "POST"
                 }))
         {
-            <input type="submit" class="btn btn-success" value="Favorite" />
+            <input type="submit" class="btn btn-primary" value="Favorite" />
         }
     }
-    else if(Model.Users.Contains(User.Identity.Name))
+    else if (Model.Users.Contains(User.Identity.Name))
     {
         using (Ajax.BeginForm(
                         "RemoveFromFavorites",
@@ -66,7 +52,7 @@
                             HttpMethod = "POST"
                         }))
         {
-            <input type="submit" class="btn btn-warning" value="Unfavorite" />
+            <input type="submit" class="btn btn-primary" value="Unfavorite" />
         }
     }
 
@@ -83,3 +69,9 @@
         }
     }
 </div>
+
+<div class="lyrics">
+    <p>Lyrics</p>
+    <p>@Model.Lyrics</p>
+</div>
+

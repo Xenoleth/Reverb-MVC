@@ -14,6 +14,8 @@
     }))
     <p>In descending order</p>
     @Html.CheckBoxFor(x => x.IsDescending)
+    <p>Only favorites</p>
+    @Html.CheckBoxFor(x => x.OnlyFavorites)
 
     <input type="submit" value="Search" />
 }

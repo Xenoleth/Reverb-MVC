@@ -67,18 +67,26 @@ namespace Reverb.Web.Controllers
             var songs = this.songService
                 .GetSongs();
 
-            switch (songRequest.SearchBy)
+            if (songRequest.OnlyFavorites)
             {
-                case "Title":
-                    songs = songs.Where(x => x.Title.Contains(songRequest.SearchTerm));
-                    break;
-                case "Album":
-                    songs = songs.Where(x => x.Album.Title.Contains(songRequest.SearchTerm));
-                    break;
-                case "Artist":
-                    songs = songs.Where(x => x.Artist.Name.Contains(songRequest.SearchTerm));
-                    break;
+                songs = songs.Where(x => x.FavoritedBy.Select(u => u.UserName).Contains(User.Identity.Name));
             }
+
+            if (!String.IsNullOrEmpty(songRequest.SearchTerm))
+            {
+                switch (songRequest.SearchBy)
+                {
+                    case "Title":
+                        songs = songs.Where(x => x.Title.Contains(songRequest.SearchTerm));
+                        break;
+                    case "Album":
+                        songs = songs.Where(x => x.Album.Title.Contains(songRequest.SearchTerm));
+                        break;
+                    case "Artist":
+                        songs = songs.Where(x => x.Artist.Name.Contains(songRequest.SearchTerm));
+                        break;
+                }
+            }            
 
             if (songRequest.IsDescending)
             {
@@ -207,6 +215,28 @@ namespace Reverb.Web.Controllers
             this.songUpdateService.DeleteSong(songId);
 
             return RedirectToAction("Library");
+        }
+
+        [HttpPost]
+        public ActionResult Details(Guid songId)
+        {
+            var song = this.songService
+                .GetSongs()
+                .Where(x => x.Id == songId)
+                .Select(x => new SongViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Artist = x.Artist.Name,
+                    Album = x.Album.Title,
+                    Duration = x.Duration,
+                    Genres = x.Genres.Select(g => g.Name).ToList(),
+                    Lyrics = x.Lyrics,
+                    Users = x.FavoritedBy.Select(u => u.Email)
+                })
+                .FirstOrDefault();
+
+            return View("SongDetails", song);
         }
     }
 }

@@ -308,6 +308,7 @@
     <Content Include="Views\Create\CreateGenre.cshtml" />
     <Content Include="Views\Create\CreateAlbum.cshtml" />
     <Content Include="Views\Create\CreateSong.cshtml" />
+    <Content Include="Views\Song\SongDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

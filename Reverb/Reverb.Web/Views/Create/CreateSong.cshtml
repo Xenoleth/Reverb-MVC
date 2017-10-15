@@ -1,28 +1,29 @@
-﻿@using Reverb.Web.Models.Song
-@model SongViewModel
+﻿@using Reverb.Web.Models.Create
+@model  CreateSongViewModel
 
-@using (Html.BeginForm("EditSong", "Song", FormMethod.Post))
+@Html.ActionLink("Song", "CreateSong", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Album", "CreateAlbum", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Artist", "CreateArtist", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Genre", "CreateGenre", "Create", null, new { @class = "btn btn-primary" })
+<br />
+
+@using (Html.BeginForm("CreateSong", "Create", FormMethod.Post))
 {
-    @Html.HiddenFor(x => x.Id)
     <p>Title</p>
-    @Html.EditorFor(x => Model.Title)
-    <br />
+    @Html.EditorFor(x => x.Title)
     <p>Album</p>
     @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }))
-    <br />
     <p>Artist</p>
     @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }))
-    <br />
     <p>Duration</p>
     @Html.EditorFor(x => x.Duration)
-    <br />
     <p>Genres</p>
     @Html.ListBoxFor(x => x.Genres, Model.AllGenres.Select(x => new SelectListItem() { Text = x, Value = x }))
-    <br />
     <p>Lyrics</p>
     @Html.TextAreaFor(x => x.Lyrics)
-    <br />
-    @Html.HiddenFor(x => x.Users)
 
     <input type="submit" class="btn btn-success" value="Save" />
 }

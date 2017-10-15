@@ -5,7 +5,7 @@ namespace Reverb.Web.Models.Song
 {
     public class SongViewModel
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Title { get; set; }
 
@@ -15,6 +15,16 @@ namespace Reverb.Web.Models.Song
 
         public string Lyrics { get; set; }
 
+        public int? Duration { get; set; }
+
+        public ICollection<string> Genres { get; set; }
+        
         public IEnumerable<string> Users { get; set; }
+
+        public IEnumerable<string> AllAlbums { get; set; }
+
+        public IEnumerable<string> AllArtists { get; set; }
+
+        public IEnumerable<string> AllGenres { get; set; }
     }
 }

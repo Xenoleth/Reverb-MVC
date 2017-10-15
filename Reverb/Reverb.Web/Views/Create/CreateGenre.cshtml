@@ -1,0 +1,19 @@
+﻿@using Reverb.Web.Models.Create
+@model  CreateGenreViewModel
+
+@Html.ActionLink("Song", "CreateSong", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Album", "CreateAlbum", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Artist", "CreateArtist", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Genre", "CreateGenre", "Create", null, new { @class = "btn btn-primary" })
+<br />
+
+@using (Html.BeginForm("CreateGenre", "Create", FormMethod.Post))
+{
+    <p>Genre's name</p>
+    @Html.EditorFor(x => x.Name)
+
+    <input type="submit" class="btn btn-success" value="Save" />
+}

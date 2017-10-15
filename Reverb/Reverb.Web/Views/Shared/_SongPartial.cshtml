@@ -5,9 +5,22 @@
     TODO: Create better card for songs
 *@
 <div class="card">
+    <p>Title</p>
     <p><b>@Model.Title</b></p>
+    <p>Album</p>
     <p>@Model.Album</p>
+    <p>Artist</p>
     <p>@Model.Artist</p>
+    <p>Duration</p>
+    @if (Model.Duration != null)
+    {
+        @(String.Format("{0}:{1:00} min", (int)Model.Duration / 60, (int)Model.Duration % 60))
+    }
+    else
+    {
+        <p>Unknown</p>
+    }
+    <p>Lyrics</p>
     <p>@Model.Lyrics</p>
 
     @if (!User.Identity.IsAuthenticated)
@@ -46,6 +59,14 @@
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
         @Html.ActionLink("Edit", "EditSong", "Song", new { songId = Model.Id }, new { @class = "btn btn-warning" })
+    }
+
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        using (Html.BeginForm("DeleteSong", "Song", new { songId = Model.Id }, FormMethod.Post))
+        {
+            <input type="submit" class="btn btn-danger" value="Delete" />
+        }
     }
 
 </div>

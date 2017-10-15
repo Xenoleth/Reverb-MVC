@@ -1,4 +1,5 @@
-﻿using Reverb.Services.Contracts;
+﻿using Bytes2you.Validation;
+using Reverb.Services.Contracts;
 using Reverb.Web.Models.Song;
 using System;
 using System.Linq;
@@ -10,14 +11,35 @@ namespace Reverb.Web.Controllers
     {
         private readonly ISongService songService;
         private readonly IUserService userService;
+        private readonly IArtistService artistService;
+        private readonly IAlbumService albumService;
+        private readonly IGenreService genreService;
+        private readonly ISongModifyService songUpdateService;
 
-        public SongController(ISongService songService, IUserService userService)
+        public SongController(
+            ISongService songService, 
+            IUserService userService,
+            IArtistService artistService,
+            IAlbumService albumService,
+            IGenreService genreService,
+            ISongModifyService songUpdateService)
         {
+            Guard.WhenArgument(songService, "songService").IsNull().Throw();
+            Guard.WhenArgument(userService, "userService").IsNull().Throw();
+            Guard.WhenArgument(artistService, "artistService").IsNull().Throw();
+            Guard.WhenArgument(albumService, "albumService").IsNull().Throw();
+            Guard.WhenArgument(genreService, "genreService").IsNull().Throw();
+            Guard.WhenArgument(songUpdateService, "songUpdateService").IsNull().Throw();
+
             this.songService = songService;
             this.userService = userService;
+            this.artistService = artistService;
+            this.albumService = albumService;
+            this.genreService = genreService;
+            this.songUpdateService = songUpdateService;
         }
 
-        // GET: Song
+        [HttpGet]
         public ActionResult Library()
         {
             var songs = this.songService
@@ -28,6 +50,8 @@ namespace Reverb.Web.Controllers
                     Title = x.Title,
                     Artist = x.Artist.Name,
                     Album = x.Album.Title,
+                    Duration = x.Duration,
+                    Genres = x.Genres.Select(g => g.Name).ToList(),
                     Lyrics = x.Lyrics,
                     Users = x.FavoritedBy.Select(u => u.Email)
                 })
@@ -76,6 +100,8 @@ namespace Reverb.Web.Controllers
                  Title = x.Title,
                  Artist = x.Artist.Name,
                  Album = x.Album.Title,
+                 Duration = x.Duration,
+                 Genres = x.Genres.Select(g => g.Name).ToList(),
                  Lyrics = x.Lyrics,
                  Users = x.FavoritedBy.Select(u => u.Email)
              })
@@ -112,8 +138,31 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditSong(Guid songId)
+        public ActionResult EditSong(Guid songId = new Guid())
         {
+            if (songId == Guid.Empty)
+            {
+                RedirectToAction("Library");
+            }
+            
+            var artistNames = this.artistService
+                .GetArtists()
+                .Select(x => x.Name)
+                .OrderBy(x => x)
+                .ToList();
+
+            var albumNames = this.albumService
+                .GetAlbums()
+                .Select(x => x.Title)
+                .OrderBy(x => x)
+                .ToList();
+
+            var genreNames = this.genreService
+                .GetGenres()
+                .Select(x => x.Name)
+                .OrderBy(x => x)
+                .ToList();
+
             var song = this.songService
                 .GetSongs()
                 .Where(x => x.Id == songId)
@@ -124,7 +173,12 @@ namespace Reverb.Web.Controllers
                     Artist = x.Artist.Name,
                     Album = x.Album.Title,
                     Lyrics = x.Lyrics,
-                    Users = x.FavoritedBy.Select(u => u.Email)
+                    Duration = x.Duration,
+                    Genres = x.Genres.Select(g => g.Name).ToList(),
+                    Users = x.FavoritedBy.Select(u => u.Email),
+                    AllArtists = artistNames,
+                    AllAlbums = albumNames,
+                    AllGenres = genreNames
                 })
                 .SingleOrDefault();
 
@@ -132,20 +186,27 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditSong(SongViewModel songModel)
+        public ActionResult EditSong(SongViewModel song)
         {
-            var song = this.songService
-                .GetSongs()
-                .Where(x => x.Id == songModel.Id)
-                .SingleOrDefault();
-
-            // TODO: Decide if here or in service
-            song.Title = songModel.Title;
-            // TODO: Change the rest of the song parameters
-
-            this.songService.Update(song);
+            this.songUpdateService.UpdateSong(
+                song.Id,
+                song.Title,
+                song.Artist,
+                song.Album,
+                song.Duration,
+                song.Genres,
+                song.Lyrics
+                );
 
             return this.RedirectToAction("Library");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSong(Guid songId)
+        {
+            this.songUpdateService.DeleteSong(songId);
+
+            return RedirectToAction("Library");
         }
     }
 }

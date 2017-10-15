@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Bytes2you.Validation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -217,6 +221,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CreateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SongController.cs" />
@@ -224,6 +229,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Create\CreateAlbumViewModel.cs" />
+    <Compile Include="Models\Create\CreateArtistViewModel.cs" />
+    <Compile Include="Models\Create\CreateGenreViewModel.cs" />
+    <Compile Include="Models\Create\CreateSongViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Song\SongSearchViewModel.cs" />
     <Compile Include="Models\Song\SongViewModel.cs" />
@@ -293,8 +302,12 @@
     <Content Include="Views\Song\Library.cshtml" />
     <Content Include="Views\Shared\_SongPartial.cshtml" />
     <Content Include="Views\Shared\_SongSearchPartial.cshtml" />
-    <Content Include="Views\Shared\_EmptyPartial.cshtml" />
     <Content Include="Views\Song\EditSong.cshtml" />
+    <Content Include="Views\Create\CreationChoice.cshtml" />
+    <Content Include="Views\Create\CreateArtist.cshtml" />
+    <Content Include="Views\Create\CreateGenre.cshtml" />
+    <Content Include="Views\Create\CreateAlbum.cshtml" />
+    <Content Include="Views\Create\CreateSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

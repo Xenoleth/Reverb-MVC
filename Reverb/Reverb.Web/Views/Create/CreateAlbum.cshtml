@@ -1,0 +1,21 @@
+﻿@using Reverb.Web.Models.Create
+@model  CreateAlbumViewModel
+
+@Html.ActionLink("Song", "CreateSong", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Album", "CreateAlbum", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Artist", "CreateArtist", "Create", null, new { @class = "btn btn-primary" })
+<br />
+@Html.ActionLink("Genre", "CreateGenre", "Create", null, new { @class = "btn btn-primary" })
+<br />
+
+@using (Html.BeginForm("CreateAlbum", "Create", FormMethod.Post))
+{
+    <p>Album's name</p>
+    @Html.EditorFor(x => x.Title)
+    <p>Choose artist</p>
+    @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }))
+
+    <input type="submit" class="btn btn-success" value="Save" />
+}

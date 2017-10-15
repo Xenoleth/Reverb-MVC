@@ -8,8 +8,8 @@ namespace Reverb.Services.Contracts
 
         void CreateGenre(string name);
 
-        void CreateAlbum(string title, string artistName);
+        void CreateAlbum(string title, string artistName, string coverUrl);
 
-        void CreateSong(string title, string artistName, string albumName, int? duration, ICollection<string> genres, string lyrics);
+        void CreateSong(string title, string artistName, string albumName, int? duration, ICollection<string> genres, string lyrics, string videoUrl);
     }
 }

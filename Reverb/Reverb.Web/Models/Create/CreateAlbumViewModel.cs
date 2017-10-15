@@ -8,6 +8,9 @@ namespace Reverb.Web.Models.Create
 
         public string Artist { get; set; }
 
+        public string CoverUrl { get; set; }
+
         public ICollection<string> AllArtists { get; set; }
+
     }
 }

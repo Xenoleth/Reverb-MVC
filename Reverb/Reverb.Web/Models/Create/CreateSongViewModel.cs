@@ -16,6 +16,8 @@ namespace Reverb.Web.Models.Create
 
         public string Lyrics { get; set; }
 
+        public string VideoUrl { get; set; }
+
         public ICollection<string> AllAlbums { get; set; }
 
         public ICollection<string> AllArtists { get; set; }

@@ -1,7 +1,6 @@
 ﻿using Bytes2you.Validation;
 using Reverb.Services.Contracts;
 using Reverb.Web.Models.Create;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -9,6 +8,10 @@ namespace Reverb.Web.Controllers
 {
     public class CreateController : Controller
     {
+        private const string Watch = "watch?v=";
+        private const string Embed = "embed/";
+        private const string CreationChoiceAction = "CreationChoice";
+
         private readonly ICreationService createService;
         private readonly IArtistService artistService;
         private readonly IAlbumService albumService;
@@ -50,7 +53,7 @@ namespace Reverb.Web.Controllers
         {
             this.createService.CreateArtist(artist.Name);
 
-            return RedirectToAction("CreationChoice");
+            return RedirectToAction(CreationChoiceAction);
         }
 
         [HttpGet]
@@ -66,7 +69,7 @@ namespace Reverb.Web.Controllers
         {
             this.createService.CreateGenre(genre.Name);
 
-            return RedirectToAction("CreationChoice");
+            return RedirectToAction(CreationChoiceAction);
         }
 
         [HttpGet]
@@ -89,9 +92,9 @@ namespace Reverb.Web.Controllers
         [HttpPost]
         public ActionResult CreateAlbum(CreateAlbumViewModel album)
         {
-            this.createService.CreateAlbum(album.Title, album.Artist);
+            this.createService.CreateAlbum(album.Title, album.Artist, album.CoverUrl);
 
-            return RedirectToAction("CreationChoice");
+            return RedirectToAction(CreationChoiceAction);
         }
 
         [HttpGet]
@@ -128,9 +131,14 @@ namespace Reverb.Web.Controllers
         [HttpPost]
         public ActionResult CreateSong(CreateSongViewModel song)
         {
-            this.createService.CreateSong(song.Title, song.Artist, song.Album, song.Duration, song.Genres, song.Lyrics);
+            if (song.VideoUrl.Contains(Watch))
+            {
+                song.VideoUrl = song.VideoUrl.Replace(Watch, Embed);
+            }
 
-            return RedirectToAction("CreationChoice");
+            this.createService.CreateSong(song.Title, song.Artist, song.Album, song.Duration, song.Genres, song.Lyrics, song.VideoUrl);
+
+            return RedirectToAction(CreationChoiceAction);
         }
     }
 }

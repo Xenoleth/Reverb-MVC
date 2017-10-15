@@ -43,6 +43,10 @@ namespace Reverb.Data.Models
         [Column(TypeName = "ntext")]
         public string Lyrics { get; set; }
 
+        [MinLength(2)]
+        [MaxLength(100)]
+        public string VideoUrl { get; set; }
+
         public virtual ICollection<User> FavoritedBy
         {
             get

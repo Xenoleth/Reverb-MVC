@@ -1,10 +1,14 @@
 ﻿@using Reverb.Web.Models.Song
 @model SongViewModel
 
-@* 
-    Render image as background
-    Render video
-*@
+<div class="video">
+    <iframe src=@Model.VideoUrl width="640" height="360">
+    </iframe>
+</div>
+
+<div class="cover">
+    <img alt="cover-image" src=@Model.CoverUrl width="200" />
+</div>
 
 <div class="details">
     <p>Title</p>
@@ -72,6 +76,12 @@
 
 <div class="lyrics">
     <p>Lyrics</p>
-    <p>@Model.Lyrics</p>
+    <div class="text">
+        @{ 
+            var lyrics = Model.Lyrics.Replace("|", "<br />");
+            
+            @Html.Raw(lyrics);
+        }
+    </div>
 </div>
 

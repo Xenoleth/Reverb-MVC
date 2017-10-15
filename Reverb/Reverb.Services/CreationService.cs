@@ -60,7 +60,7 @@ namespace Reverb.Services
             this.context.SaveChanges();
         }
 
-        public void CreateAlbum(string title, string artistName)
+        public void CreateAlbum(string title, string artistName, string coverUrl)
         {
             if (!this.artistsRepo.All.Any(x => x.Name == artistName))
             {
@@ -75,7 +75,8 @@ namespace Reverb.Services
             var album = new Album()
             {
                 Title = title,
-                Artist = artist
+                Artist = artist,
+                CoverUrl = coverUrl
             };
 
             this.albumsRepo.Add(album);
@@ -83,7 +84,7 @@ namespace Reverb.Services
             this.context.SaveChanges();
         }
 
-        public void CreateSong(string title, string artistName, string albumName, int? duration, ICollection<string> selectedGenres, string lyrics)
+        public void CreateSong(string title, string artistName, string albumName, int? duration, ICollection<string> selectedGenres, string lyrics, string videoUrl)
         {
             var artist = this.artistsRepo
                 .All
@@ -109,7 +110,8 @@ namespace Reverb.Services
                 Album = album,
                 Duration = duration,
                 Genres = genres,
-                Lyrics = lyrics
+                Lyrics = lyrics,
+                VideoUrl = videoUrl
             };
 
             this.songsRepo.Add(song);

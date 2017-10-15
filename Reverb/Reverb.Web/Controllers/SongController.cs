@@ -9,6 +9,12 @@ namespace Reverb.Web.Controllers
 {
     public class SongController : Controller
     {
+        private const string Watch = "watch?v=";
+        private const string Embed = "embed/";
+        private const string LibraryAction = "Library";
+        private const string LibraryView = "Library";
+        private const string SongDetailsView = "SongDetails";
+
         private readonly ISongService songService;
         private readonly IUserService userService;
         private readonly IArtistService artistService;
@@ -53,6 +59,8 @@ namespace Reverb.Web.Controllers
                     Duration = x.Duration,
                     Genres = x.Genres.Select(g => g.Name).ToList(),
                     Lyrics = x.Lyrics,
+                    VideoUrl = x.VideoUrl,
+                    CoverUrl = x.Album.CoverUrl,
                     Users = x.FavoritedBy.Select(u => u.Email)
                 })
                 .OrderBy(x => x.Title)
@@ -111,12 +119,14 @@ namespace Reverb.Web.Controllers
                  Duration = x.Duration,
                  Genres = x.Genres.Select(g => g.Name).ToList(),
                  Lyrics = x.Lyrics,
+                 VideoUrl = x.VideoUrl,
+                 CoverUrl = x.Album.CoverUrl,
                  Users = x.FavoritedBy.Select(u => u.Email)
              })
              .ToList();
 
 
-            return View("Library", data);
+            return View(LibraryView, data);
         }
 
         [HttpPost]
@@ -129,7 +139,7 @@ namespace Reverb.Web.Controllers
 
             this.userService.AddFavoriteSong(song, User.Identity.Name);
 
-            return this.RedirectToAction("Library");
+            return this.RedirectToAction(LibraryAction);
         }
 
         [HttpPost]
@@ -142,7 +152,7 @@ namespace Reverb.Web.Controllers
 
             this.userService.RemoveFavoriteSong(song, User.Identity.Name);
 
-            return this.RedirectToAction("Library");
+            return this.RedirectToAction(LibraryAction);
         }
 
         [HttpGet]
@@ -150,7 +160,7 @@ namespace Reverb.Web.Controllers
         {
             if (songId == Guid.Empty)
             {
-                RedirectToAction("Library");
+                RedirectToAction(LibraryAction);
             }
             
             var artistNames = this.artistService
@@ -183,6 +193,8 @@ namespace Reverb.Web.Controllers
                     Lyrics = x.Lyrics,
                     Duration = x.Duration,
                     Genres = x.Genres.Select(g => g.Name).ToList(),
+                    VideoUrl = x.VideoUrl,
+                    CoverUrl = x.Album.CoverUrl,
                     Users = x.FavoritedBy.Select(u => u.Email),
                     AllArtists = artistNames,
                     AllAlbums = albumNames,
@@ -196,6 +208,11 @@ namespace Reverb.Web.Controllers
         [HttpPost]
         public ActionResult EditSong(SongViewModel song)
         {
+            if (song.VideoUrl.Contains(Watch))
+            {
+                song.VideoUrl = song.VideoUrl.Replace(Watch, Embed);
+            }
+
             this.songUpdateService.UpdateSong(
                 song.Id,
                 song.Title,
@@ -203,10 +220,12 @@ namespace Reverb.Web.Controllers
                 song.Album,
                 song.Duration,
                 song.Genres,
-                song.Lyrics
+                song.Lyrics,
+                song.VideoUrl,
+                song.CoverUrl
                 );
 
-            return this.RedirectToAction("Library");
+            return this.RedirectToAction(LibraryAction);
         }
 
         [HttpPost]
@@ -214,7 +233,7 @@ namespace Reverb.Web.Controllers
         {
             this.songUpdateService.DeleteSong(songId);
 
-            return RedirectToAction("Library");
+            return RedirectToAction(LibraryAction);
         }
 
         [HttpPost]
@@ -232,11 +251,13 @@ namespace Reverb.Web.Controllers
                     Duration = x.Duration,
                     Genres = x.Genres.Select(g => g.Name).ToList(),
                     Lyrics = x.Lyrics,
+                    VideoUrl = x.VideoUrl,
+                    CoverUrl = x.Album.CoverUrl,
                     Users = x.FavoritedBy.Select(u => u.Email)
                 })
                 .FirstOrDefault();
 
-            return View("SongDetails", song);
+            return View(SongDetailsView, song);
         }
     }
 }

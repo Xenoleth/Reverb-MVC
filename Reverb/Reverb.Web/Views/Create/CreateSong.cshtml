@@ -18,6 +18,8 @@
     @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }))
     <p>Artist</p>
     @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }))
+    <p>Music video URL</p>
+    @Html.EditorFor(x => x.VideoUrl)
     <p>Duration</p>
     @Html.EditorFor(x => x.Duration)
     <p>Genres</p>

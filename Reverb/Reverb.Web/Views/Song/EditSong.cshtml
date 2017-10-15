@@ -13,6 +13,12 @@
     <p>Artist</p>
     @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }))
     <br />
+    <p>Video URL</p>
+    @Html.EditorFor(x => x.VideoUrl)
+    <br />
+    <br />
+    <p>Album cover image</p>
+    @Html.EditorFor(x => x.CoverUrl)
     <p>Duration</p>
     @Html.EditorFor(x => x.Duration)
     <br />

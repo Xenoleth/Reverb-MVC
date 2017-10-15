@@ -36,7 +36,7 @@ namespace Reverb.Services
             this.context = context;
         }
 
-        public void UpdateSong(Guid id, string title, string artistName, string albumName, int? duration, ICollection<string> selectedGenres, string lyrics)
+        public void UpdateSong(Guid id, string title, string artistName, string albumName, int? duration, ICollection<string> selectedGenres, string lyrics, string videoUrl, string coverUrl)
         {
             var song = this.songsRepo
                 .All
@@ -60,12 +60,15 @@ namespace Reverb.Services
                 .Where(x => x.Title == albumName)
                 .FirstOrDefault();
 
+            album.CoverUrl = coverUrl;
+
             song.Title = title;
             song.Artist = artist;
             song.Album = album;
             song.Genres = genres;
             song.Duration = duration;
             song.Lyrics = lyrics;
+            song.VideoUrl = videoUrl;
 
             this.songsRepo.Update(song);
 

@@ -16,6 +16,8 @@
     @Html.EditorFor(x => x.Title)
     <p>Choose artist</p>
     @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }))
+    <p>Cover image URL</p>
+    @Html.EditorFor(x => x.CoverUrl)
 
     <input type="submit" class="btn btn-success" value="Save" />
 }

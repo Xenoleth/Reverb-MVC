@@ -1,6 +1,10 @@
 ﻿@using Reverb.Web.Models.Song
 @model SongViewModel
 
+@{ 
+    ViewBag.Title = Model.Artist;
+}
+
 <div class="col-md-6 col-md-offset-1" style="width:270px; min-height:450px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4); border-radius: 5px; margin-top: 20px; margin-right: 20px; padding-right: 0;">
     <div class="image" style=" margin-left: -15px">
         <img alt="cover-image" src=@Model.CoverUrl width="270" style="padding-bottom:10px; border-radius: 5px 5px 0 0;" />
@@ -36,6 +40,7 @@
                         HttpMethod = "POST"
                     }))
             {
+                @Html.AntiForgeryToken()
                 <input type="submit" class="btn btn-primary" value="Details" style = "width: 100px" />
             }
         }
@@ -53,6 +58,7 @@
                         HttpMethod = "POST"
                     }))
             {
+                @Html.AntiForgeryToken()
                 <input type="submit" class="btn btn-success" value="Favorite" style = "width: 100px"/>
             }
         }
@@ -67,6 +73,7 @@
                                 HttpMethod = "POST"
                             }))
             {
+                @Html.AntiForgeryToken()
                 <input type="submit" class="btn btn-warning" value="Unfave" style = "width: 100px" />
             }
         }
@@ -88,6 +95,7 @@
         {
             using (Html.BeginForm("DeleteSong", "Song", new { songId = Model.Id }, FormMethod.Post))
             {
+                @Html.AntiForgeryToken()
                 <input type="submit" class="btn btn-danger" value="Delete" style = "width: 100px"/>
             }
         }

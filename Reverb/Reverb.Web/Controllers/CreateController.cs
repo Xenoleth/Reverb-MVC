@@ -50,6 +50,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateArtist(CreateArtistViewModel artist)
         {
             this.createService.CreateArtist(artist.Name);
@@ -66,6 +67,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateGenre(CreateGenreViewModel genre)
         {
             this.createService.CreateGenre(genre.Name);
@@ -91,6 +93,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateAlbum(CreateAlbumViewModel album)
         {
             this.createService.CreateAlbum(album.Title, album.Artist, album.CoverUrl);
@@ -130,6 +133,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateSong(CreateSongViewModel song)
         {
             if (song.VideoUrl.Contains(Watch))

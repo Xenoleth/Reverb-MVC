@@ -71,7 +71,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult SearchSong(SongSearchViewModel songRequest)
         {
             var songs = this.songService
@@ -96,19 +96,37 @@ namespace Reverb.Web.Controllers
                         songs = songs.Where(x => x.Artist.Name.Contains(songRequest.SearchTerm));
                         break;
                 }
-            }            
+            }
 
             if (songRequest.IsDescending)
             {
-                songs = songs.OrderByDescending(x => x.Artist.Name)
-                    .OrderByDescending(x => x.Album.Title)
-                    .OrderByDescending(x => x.Title);
+                switch (songRequest.OrderBy)
+                {
+                    case "Title":
+                        songs = songs.OrderByDescending(x => x.Title);
+                        break;
+                    case "Album":
+                        songs = songs.OrderByDescending(x => x.Album.Title);
+                        break;
+                    case "Artist":
+                        songs = songs.OrderByDescending(x => x.Artist.Name);
+                        break;
+                }
             }
             else
             {
-                songs = songs.OrderBy(x => x.Artist.Name)
-                    .OrderBy(x => x.Album.Title)
-                    .OrderBy(x => x.Title);
+                switch (songRequest.OrderBy)
+                {
+                    case "Title":
+                        songs = songs.OrderBy(x => x.Title);
+                        break;
+                    case "Album":
+                        songs = songs.OrderBy(x => x.Album.Title);
+                        break;
+                    case "Artist":
+                        songs = songs.OrderBy(x => x.Artist.Name);
+                        break;
+                }
             }
 
             var data = songs
@@ -132,6 +150,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddToFavorites(Guid songId)
         {
             var song = this.songService
@@ -145,6 +164,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RemoveFromFavorites(Guid songId)
         {
             var song = this.songService
@@ -209,6 +229,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult EditSong(SongViewModel song)
         {
@@ -233,6 +254,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteSong(Guid songId)
         {
@@ -242,6 +264,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Details(Guid songId)
         {
             var song = this.songService

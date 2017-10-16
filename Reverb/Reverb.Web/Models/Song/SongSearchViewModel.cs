@@ -6,6 +6,8 @@
 
         public string SearchBy { get; set; }
 
+        public string OrderBy { get; set; }
+
         public bool IsDescending { get; set; }
 
         public bool OnlyFavorites { get; set; }

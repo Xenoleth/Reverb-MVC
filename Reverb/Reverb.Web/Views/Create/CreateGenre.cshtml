@@ -1,6 +1,8 @@
 ﻿@using Reverb.Web.Models.Create
 @model  CreateGenreViewModel
-
+@{
+    ViewBag.Title = "THIS IS REVERB";
+}
 <nav class="navbar navbar-custom">
     <div class="container">
         <div class="collapse navbar-collapse navbar-main-collapse">
@@ -22,10 +24,12 @@
                 @Html.AntiForgeryToken()
                 <h4>Create Genre</h4>
                 <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.EditorFor(x => Model.Name, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })                        
                     </div>
                 </div>
                 <div class="form-group">
@@ -37,3 +41,8 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+}

@@ -1,6 +1,8 @@
 ﻿@using Reverb.Web.Models.Song
 @model SongViewModel
-
+@{
+    ViewBag.Title = "THIS IS REVERB";
+}
 <section id="contact">
     <div class="container content-section text-center">
         <div class="row">
@@ -9,11 +11,13 @@
                 @Html.AntiForgeryToken()
                 <h4>Edit song details</h4>
                 <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 @Html.HiddenFor(x => x.Id)
                 <div class="form-group">
                     @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.EditorFor(x => Model.Title, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                        @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
@@ -21,6 +25,7 @@
                     @Html.LabelFor(m => m.Album, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+                        @Html.ValidationMessageFor(m => m.Album, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
@@ -28,6 +33,7 @@
                     @Html.LabelFor(m => m.Artist, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+                        @Html.ValidationMessageFor(m => m.Artist, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
@@ -35,6 +41,7 @@
                     @Html.LabelFor(m => m.VideoUrl, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.EditorFor(x => x.VideoUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                        @Html.ValidationMessageFor(m => m.VideoUrl, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
@@ -42,13 +49,15 @@
                     @Html.LabelFor(m => m.CoverUrl, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.EditorFor(x => x.CoverUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
-                    </div>
+                        @Html.ValidationMessageFor(m => m.CoverUrl, "", new { @class = "text-danger" })
+                     </div>
                 </div>
                 <br />
                 <div class="form-group">
                     @Html.LabelFor(m => m.Duration, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.EditorFor(x => x.Duration, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                        @Html.ValidationMessageFor(m => m.Duration, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
@@ -56,6 +65,7 @@
                     @Html.LabelFor(m => m.Genres, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.ListBoxFor(x => x.Genres, Model.AllGenres.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+                        @Html.ValidationMessageFor(m => m.Genres, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
@@ -63,6 +73,7 @@
                     @Html.LabelFor(m => m.Lyrics, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextAreaFor(x => x.Lyrics, new { @class = "form-control", @style = "margin-bottom:15px;" })
+                        @Html.ValidationMessageFor(m => m.Lyrics, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @Html.HiddenFor(x => x.Users)
@@ -76,3 +87,8 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+}

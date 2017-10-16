@@ -3,6 +3,8 @@
 
 *A music site that offers information about songs. Add new songs and then listen to them. (gasp)*
 
+![ReverbSplash](http://picbg.net/u/21482/62342/866227.png)
+
 ### 1. Administrative functionality:
 
 * Edit songs

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Reverb.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CreateController : Controller
     {
         private const string Watch = "watch?v=";

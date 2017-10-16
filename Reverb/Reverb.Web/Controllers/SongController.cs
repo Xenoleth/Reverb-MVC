@@ -46,6 +46,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Library()
         {
             var songs = this.songService
@@ -70,6 +71,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult SearchSong(SongSearchViewModel songRequest)
         {
             var songs = this.songService
@@ -156,6 +158,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditSong(Guid songId = new Guid())
         {
             if (songId == Guid.Empty)
@@ -206,6 +209,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditSong(SongViewModel song)
         {
             if (song.VideoUrl.Contains(Watch))
@@ -229,6 +233,7 @@ namespace Reverb.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteSong(Guid songId)
         {
             this.songModifyService.DeleteSong(songId);

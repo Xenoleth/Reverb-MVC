@@ -12,20 +12,60 @@
 
 @using (Html.BeginForm("CreateSong", "Create", FormMethod.Post))
 {
-    <p>Title</p>
-    @Html.EditorFor(x => x.Title)
-    <p>Album</p>
-    @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }))
-    <p>Artist</p>
-    @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }))
-    <p>Music video URL</p>
-    @Html.EditorFor(x => x.VideoUrl)
-    <p>Duration</p>
-    @Html.EditorFor(x => x.Duration)
-    <p>Genres</p>
-    @Html.ListBoxFor(x => x.Genres, Model.AllGenres.Select(x => new SelectListItem() { Text = x, Value = x }))
-    <p>Lyrics</p>
-    @Html.TextAreaFor(x => x.Lyrics)
-
-    <input type="submit" class="btn btn-success" value="Save" />
+    @Html.AntiForgeryToken()
+    <h4>Create Song</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(x => Model.Title, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Album, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Artist, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.VideoUrl, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(x => x.VideoUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Duration, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(x => x.Duration, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Genres, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.ListBoxFor(x => x.Genres, Model.AllGenres.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Lyrics, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(x => x.Lyrics, new { @class = "form-control", @style = "margin-bottom:15px;" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-success" value="Save" />
+        </div>
+    </div>
 }

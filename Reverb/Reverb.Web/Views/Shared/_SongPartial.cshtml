@@ -4,26 +4,28 @@
 @*
     TODO: Create better card for songs
 *@
-<div class="card">
+<div class="card" style="width:200px">
     <div class="image">
-        <img alt="cover-image" src=@Model.CoverUrl width="200" />
+        <img alt="cover-image" src=@Model.CoverUrl width="200" style="padding-bottom:10px" />
     </div>
 
-    <p>Title</p>
-    <p><b>@Model.Title</b></p>
-    <p>Album</p>
-    <p>@Model.Album</p>
-    <p>Artist</p>
-    <p>@Model.Artist</p>
-    <p>Duration</p>
-    @if (Model.Duration != null)
-    {
-        @(String.Format("{0}:{1:00} min", (int)Model.Duration / 60, (int)Model.Duration % 60))
-    }
-    else
-    {
-        <p>Unknown</p>
-    }
+    <div class="col-md-4" style="padding-bottom:10px"><b>Title</b></div>
+    <div class="col-md-8" style="padding-bottom:10px">@Model.Title</div>
+    <div class="col-md-4" style="padding-bottom:10px"><b>Album</b></div>
+    <div class="col-md-8" style="padding-bottom:10px">@Model.Album</div>
+    <div class="col-md-4" style="padding-bottom:10px"><b>Artist</b></div>
+    <div class="col-md-8" style="padding-bottom:10px">@Model.Artist</div>
+    <div class="col-md-4" style="padding-bottom:10px"><b>Duration</b></div>
+    <div class="col-md-8" style="padding-bottom:10px">
+        @if (Model.Duration != null)
+        {
+            @(String.Format("{0}:{1:00} min", (int)Model.Duration / 60, (int)Model.Duration % 60))
+        }
+        else
+        {
+            <p>Unknown</p>
+        }
+    </div>
 
     @if (User.Identity.IsAuthenticated)
     {
@@ -41,11 +43,7 @@
     }
 
     @* Fix random empty if by addind logic to the others with && *@
-    @if (!User.Identity.IsAuthenticated)
-    {
-
-    }
-    else if (!Model.Users.Contains(User.Identity.Name))
+    @if (User.Identity.IsAuthenticated && !Model.Users.Contains(User.Identity.Name))
     {
         using (Ajax.BeginForm(
                 "AddToFavorites",
@@ -59,7 +57,7 @@
             <input type="submit" class="btn btn-success" value="Favorite" />
         }
     }
-    else if(Model.Users.Contains(User.Identity.Name))
+    else if(User.Identity.IsAuthenticated && Model.Users.Contains(User.Identity.Name))
     {
         using (Ajax.BeginForm(
                         "RemoveFromFavorites",

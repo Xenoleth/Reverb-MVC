@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reverb</title>
+    <title>Reverb | Endless music</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -15,9 +15,8 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                @Html.ActionLink("Reverb", "Index", "Home", new { area = "" }, new { @class = "navbar-brand page-scroll" })
+                @Html.ActionLink("REVERB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand page-scroll" })
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -25,13 +24,11 @@
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Create", "CreationChoice", "Create")</li>
-                    }      
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
 
     <!-- Intro Header -->
@@ -52,37 +49,17 @@
             </div>
         </div>
     </header>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Reverb", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Library", "Library", "Song")</li>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Create", "CreationChoice", "Create")</li>
-                    }
-                    
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+
+    @RenderBody()
+
+    <footer>
+        <div class="container text-center">
+            <p class="credits">
+                Copyright &copy; Pesho Inc. 2017<br />
+                "Reverb" Feel the rhythm
+            </p>
         </div>
-    </div>*@
-    @*<div class="container body-content">*@
-    <div>
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Reverb MVC</p>
-        </footer>
-    </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -20,7 +20,7 @@ namespace Reverb.Web.Controllers
         private readonly IArtistService artistService;
         private readonly IAlbumService albumService;
         private readonly IGenreService genreService;
-        private readonly ISongModifyService songUpdateService;
+        private readonly ISongModifyService songModifyService;
 
         public SongController(
             ISongService songService, 
@@ -28,21 +28,21 @@ namespace Reverb.Web.Controllers
             IArtistService artistService,
             IAlbumService albumService,
             IGenreService genreService,
-            ISongModifyService songUpdateService)
+            ISongModifyService songModifyService)
         {
             Guard.WhenArgument(songService, "songService").IsNull().Throw();
             Guard.WhenArgument(userService, "userService").IsNull().Throw();
             Guard.WhenArgument(artistService, "artistService").IsNull().Throw();
             Guard.WhenArgument(albumService, "albumService").IsNull().Throw();
             Guard.WhenArgument(genreService, "genreService").IsNull().Throw();
-            Guard.WhenArgument(songUpdateService, "songUpdateService").IsNull().Throw();
+            Guard.WhenArgument(songModifyService, "songModifyService").IsNull().Throw();
 
             this.songService = songService;
             this.userService = userService;
             this.artistService = artistService;
             this.albumService = albumService;
             this.genreService = genreService;
-            this.songUpdateService = songUpdateService;
+            this.songModifyService = songModifyService;
         }
 
         [HttpGet]
@@ -213,7 +213,7 @@ namespace Reverb.Web.Controllers
                 song.VideoUrl = song.VideoUrl.Replace(Watch, Embed);
             }
 
-            this.songUpdateService.UpdateSong(
+            this.songModifyService.UpdateSong(
                 song.Id,
                 song.Title,
                 song.Artist,
@@ -231,7 +231,7 @@ namespace Reverb.Web.Controllers
         [HttpPost]
         public ActionResult DeleteSong(Guid songId)
         {
-            this.songUpdateService.DeleteSong(songId);
+            this.songModifyService.DeleteSong(songId);
 
             return RedirectToAction(LibraryAction);
         }

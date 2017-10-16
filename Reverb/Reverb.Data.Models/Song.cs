@@ -18,7 +18,7 @@ namespace Reverb.Data.Models
 
         [Required]
         [MinLength(2)]
-        [MaxLength(20)]
+        [MaxLength(200)]
         public string Title { get; set; }
 
         public virtual Album Album { get; set; }
@@ -44,7 +44,7 @@ namespace Reverb.Data.Models
         public string Lyrics { get; set; }
 
         [MinLength(2)]
-        [MaxLength(100)]
+        [MaxLength(10000)]
         public string VideoUrl { get; set; }
 
         public virtual ICollection<User> FavoritedBy

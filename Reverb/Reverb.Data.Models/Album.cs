@@ -19,7 +19,7 @@ namespace Reverb.Data.Models
         public virtual Artist Artist { get; set; }
 
         [MinLength(2)]
-        [MaxLength(100)]
+        [MaxLength(10000)]
         public string CoverUrl { get; set; }
 
         public virtual ICollection<Song> Songs

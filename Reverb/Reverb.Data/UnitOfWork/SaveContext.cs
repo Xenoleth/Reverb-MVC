@@ -1,4 +1,5 @@
-﻿using Reverb.Data.Contracts;
+﻿using Bytes2you.Validation;
+using Reverb.Data.Contracts;
 
 namespace Reverb.Data.SaveChanges
 {
@@ -8,6 +9,8 @@ namespace Reverb.Data.SaveChanges
 
         public SaveContext(IReverbDbContext context)
         {
+            Guard.WhenArgument(context, "context").IsNull().Throw();
+
             this.context = context;
         }
 

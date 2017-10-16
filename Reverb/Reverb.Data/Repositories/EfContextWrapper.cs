@@ -1,4 +1,5 @@
-﻿using Reverb.Data.Contracts;
+﻿using Bytes2you.Validation;
+using Reverb.Data.Contracts;
 using Reverb.Data.Models.Contracts;
 using System;
 using System.Data.Entity;
@@ -14,6 +15,8 @@ namespace Reverb.Data.Repositories
 
         public EfContextWrapper(IReverbDbContext context)
         {
+            Guard.WhenArgument(context, "context").IsNull().Throw();
+
             this.context = context;
         }
 

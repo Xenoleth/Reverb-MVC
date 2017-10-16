@@ -27,6 +27,8 @@ namespace Reverb.Services
 
         public void Update(Artist artist)
         {
+            Guard.WhenArgument(artist, "artist").IsNull().Throw();
+
             this.artistsRepo.Update(artist);
             this.context.SaveChanges();
         }

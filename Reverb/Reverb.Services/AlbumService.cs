@@ -27,6 +27,8 @@ namespace Reverb.Services
 
         public void Update(Album album)
         {
+            Guard.WhenArgument(album, "album").IsNull().Throw();
+
             this.albumsRepo.Update(album);
             this.context.SaveChanges();
         }

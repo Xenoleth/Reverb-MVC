@@ -38,6 +38,14 @@ namespace Reverb.Services
 
         public void UpdateSong(Guid id, string title, string artistName, string albumName, int? duration, ICollection<string> selectedGenres, string lyrics, string videoUrl, string coverUrl)
         {
+            Guard.WhenArgument(title, "title").IsNull().Throw();
+            Guard.WhenArgument(artistName, "artistName").IsNull().Throw();
+            Guard.WhenArgument(albumName, "albumName").IsNull().Throw();
+            Guard.WhenArgument(selectedGenres, "selectedGenres").IsNull().Throw();
+            Guard.WhenArgument(lyrics, "lyrics").IsNull().Throw();
+            Guard.WhenArgument(videoUrl, "videoUrl").IsNull().Throw();
+            Guard.WhenArgument(coverUrl, "coverUrl").IsNull().Throw();
+
             var song = this.songsRepo
                 .All
                 .Where(x => x.Id == id)

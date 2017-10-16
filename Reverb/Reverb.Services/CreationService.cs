@@ -38,6 +38,8 @@ namespace Reverb.Services
 
         public void CreateArtist(string name)
         {
+            Guard.WhenArgument(name, "name").IsNull().Throw();
+
             var artist = new Artist()
             {
                 Name = name
@@ -50,6 +52,8 @@ namespace Reverb.Services
 
         public void CreateGenre(string name)
         {
+            Guard.WhenArgument(name, "name").IsNull().Throw();
+
             var genre = new Genre()
             {
                 Name = name
@@ -62,6 +66,10 @@ namespace Reverb.Services
 
         public void CreateAlbum(string title, string artistName, string coverUrl)
         {
+            Guard.WhenArgument(title, "title").IsNull().Throw();
+            Guard.WhenArgument(artistName, "artistName").IsNull().Throw();
+            Guard.WhenArgument(coverUrl, "coverUrl").IsNull().Throw();
+
             if (!this.artistsRepo.All.Any(x => x.Name == artistName))
             {
                 this.CreateArtist(artistName);
@@ -86,6 +94,14 @@ namespace Reverb.Services
 
         public void CreateSong(string title, string artistName, string albumName, int? duration, ICollection<string> selectedGenres, string lyrics, string videoUrl)
         {
+            Guard.WhenArgument(title, "title").IsNull().Throw();
+            Guard.WhenArgument(artistName, "artistName").IsNull().Throw();
+            Guard.WhenArgument(albumName, "albumName").IsNull().Throw();
+            Guard.WhenArgument(duration, "duration").IsNull().Throw();
+            Guard.WhenArgument(selectedGenres, "selectedGenres").IsNull().Throw();
+            Guard.WhenArgument(lyrics, "lyrics").IsNull().Throw();
+            Guard.WhenArgument(videoUrl, "videoUrl").IsNull().Throw();
+
             var artist = this.artistsRepo
                 .All
                 .Where(x => x.Name == artistName)

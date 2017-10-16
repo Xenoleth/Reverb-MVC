@@ -41,6 +41,7 @@ namespace Reverb.Services
             Guard.WhenArgument(title, "title").IsNull().Throw();
             Guard.WhenArgument(artistName, "artistName").IsNull().Throw();
             Guard.WhenArgument(albumName, "albumName").IsNull().Throw();
+            Guard.WhenArgument(duration, "duration").IsNull().Throw();
             Guard.WhenArgument(selectedGenres, "selectedGenres").IsNull().Throw();
             Guard.WhenArgument(lyrics, "lyrics").IsNull().Throw();
             Guard.WhenArgument(videoUrl, "videoUrl").IsNull().Throw();

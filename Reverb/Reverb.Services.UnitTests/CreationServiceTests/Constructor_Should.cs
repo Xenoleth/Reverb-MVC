@@ -4,7 +4,7 @@ using Reverb.Data.Contracts;
 using Reverb.Data.Models;
 using System;
 
-namespace Reverb.Services.UnitTests.SongModifyServiceTests
+namespace Reverb.Services.UnitTests.CreationServiceTests
 {
     [TestClass]
     public class Constructor_Should
@@ -20,11 +20,11 @@ namespace Reverb.Services.UnitTests.SongModifyServiceTests
             var context = new Mock<ISaveContext>();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new SongModifyService(
-                null, 
-                artistRepo.Object, 
-                albumRepo.Object, 
-                genreRepo.Object, 
+            Assert.ThrowsException<ArgumentNullException>(() => new CreationService(
+                null,
+                artistRepo.Object,
+                albumRepo.Object,
+                genreRepo.Object,
                 context.Object));
         }
 
@@ -39,7 +39,7 @@ namespace Reverb.Services.UnitTests.SongModifyServiceTests
             var context = new Mock<ISaveContext>();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new SongModifyService(
+            Assert.ThrowsException<ArgumentNullException>(() => new CreationService(
                 songRepo.Object,
                 null,
                 albumRepo.Object,
@@ -58,7 +58,7 @@ namespace Reverb.Services.UnitTests.SongModifyServiceTests
             var context = new Mock<ISaveContext>();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new SongModifyService(
+            Assert.ThrowsException<ArgumentNullException>(() => new CreationService(
                 null,
                 artistRepo.Object,
                 null,
@@ -77,7 +77,7 @@ namespace Reverb.Services.UnitTests.SongModifyServiceTests
             var context = new Mock<ISaveContext>();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new SongModifyService(
+            Assert.ThrowsException<ArgumentNullException>(() => new CreationService(
                 songRepo.Object,
                 artistRepo.Object,
                 albumRepo.Object,
@@ -96,7 +96,7 @@ namespace Reverb.Services.UnitTests.SongModifyServiceTests
             //var context = new Mock<ISaveContext>();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new SongModifyService(
+            Assert.ThrowsException<ArgumentNullException>(() => new CreationService(
                 songRepo.Object,
                 artistRepo.Object,
                 albumRepo.Object,

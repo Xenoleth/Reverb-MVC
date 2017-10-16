@@ -68,6 +68,11 @@
     <Compile Include="ArtistServiceTests\Constructor_Should.cs" />
     <Compile Include="ArtistServiceTests\GetArtists_Should.cs" />
     <Compile Include="ArtistServiceTests\Update_Should.cs" />
+    <Compile Include="CreationServiceTests\Constructor_Should.cs" />
+    <Compile Include="CreationServiceTests\CreateAlbum_Should.cs" />
+    <Compile Include="CreationServiceTests\CreateArtist_Should.cs" />
+    <Compile Include="CreationServiceTests\CreateGenre_Should.cs" />
+    <Compile Include="CreationServiceTests\CreateSong_Should.cs" />
     <Compile Include="GenreServiceTests\Constructor_Should.cs" />
     <Compile Include="GenreServiceTests\GetGenres_Should.cs" />
     <Compile Include="GenreServiceTests\Update_Should.cs" />

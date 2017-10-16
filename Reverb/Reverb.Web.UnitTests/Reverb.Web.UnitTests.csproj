@@ -89,6 +89,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateControllerTests\HttpGet_CreateAlbum_Should.cs" />
+    <Compile Include="CreateControllerTests\HttpGet_CreateSong_Should.cs" />
+    <Compile Include="CreateControllerTests\HttpPost_CreateAlbum_Should.cs" />
+    <Compile Include="CreateControllerTests\HttpPost_CreateArtist_Should.cs" />
+    <Compile Include="CreateControllerTests\HttpPost_CreateGenre_Should.cs" />
+    <Compile Include="CreateControllerTests\HttpPost_CreateSong_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SongControllerTests\AddToFavorites_Should.cs" />
     <Compile Include="SongControllerTests\DeleteSong_Should.cs" />

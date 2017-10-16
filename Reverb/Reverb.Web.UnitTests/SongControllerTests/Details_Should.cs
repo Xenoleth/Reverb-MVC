@@ -63,7 +63,7 @@ namespace Reverb.Web.UnitTests.SongControllerTests
             sut.Details(id);
 
             // Assert
-            songService.Verify(x => x.GetSongs());
+            songService.Verify(x => x.GetSongs(), Times.Once);
         }
     }
 }

@@ -4,19 +4,19 @@
 @*
     TODO: Create better card for songs
 *@
-<div class="card" style="width:200px">
-    <div class="image">
-        <img alt="cover-image" src=@Model.CoverUrl width="200" style="padding-bottom:10px" />
+<div class="col-md-6 col-md-offset-1" style="width:270px; min-height:450px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4); border-radius: 5px; margin-top: 20px; margin-right: 20px">
+    <div class="image" style=" margin-left: -15px">
+        <img alt="cover-image" src=@Model.CoverUrl width="270" style="padding-bottom:10px; border-radius: 5px 5px 0 0;" />
     </div>
 
-    <div class="col-md-4" style="padding-bottom:10px"><b>Title</b></div>
-    <div class="col-md-8" style="padding-bottom:10px">@Model.Title</div>
-    <div class="col-md-4" style="padding-bottom:10px"><b>Album</b></div>
-    <div class="col-md-8" style="padding-bottom:10px">@Model.Album</div>
-    <div class="col-md-4" style="padding-bottom:10px"><b>Artist</b></div>
-    <div class="col-md-8" style="padding-bottom:10px">@Model.Artist</div>
-    <div class="col-md-4" style="padding-bottom:10px"><b>Duration</b></div>
-    <div class="col-md-8" style="padding-bottom:10px">
+    <div class="col-md-5" style="padding-bottom:10px"><b>Title</b></div>
+    <div class="col-md-7" style="padding-bottom:10px">@Model.Title</div>
+    <div class="col-md-5" style="padding-bottom:10px"><b>Album</b></div>
+    <div class="col-md-7" style="padding-bottom:10px">@Model.Album</div>
+    <div class="col-md-5" style="padding-bottom:10px"><b>Artist</b></div>
+    <div class="col-md-7" style="padding-bottom:10px">@Model.Artist</div>
+    <div class="col-md-5" style="padding-bottom:10px"><b>Duration</b></div>
+    <div class="col-md-7" style="padding-bottom:10px">
         @if (Model.Duration != null)
         {
             @(String.Format("{0}:{1:00} min", (int)Model.Duration / 60, (int)Model.Duration % 60))
@@ -27,61 +27,68 @@
         }
     </div>
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        using (Ajax.BeginForm(
-                "Details",
-                "Song",
-                new { songId = Model.Id },
-                new AjaxOptions
-                {
-                    HttpMethod = "POST"
-                }))
+    <div class="col-md-6" style="padding-bottom:10px">
+        @if (User.Identity.IsAuthenticated)
         {
-            <input type="submit" class="btn btn-primary" value="Details" />
+            using (Ajax.BeginForm(
+                    "Details",
+                    "Song",
+                    new { songId = Model.Id },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST"
+                    }))
+            {
+                <input type="submit" class="btn btn-primary" value="Details" />
+            }
         }
-    }
+    </div>
+   
+    <div class="col-md-6" style="padding-bottom:10px">
+        @if (User.Identity.IsAuthenticated && !Model.Users.Contains(User.Identity.Name))
+        {
+            using (Ajax.BeginForm(
+                    "AddToFavorites",
+                    "Song",
+                    new { songId = Model.Id },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST"
+                    }))
+            {
+                <input type="submit" class="btn btn-success" value="Favorite" />
+            }
+        }
+        else if (User.Identity.IsAuthenticated && Model.Users.Contains(User.Identity.Name))
+        {
+            using (Ajax.BeginForm(
+                            "RemoveFromFavorites",
+                            "Song",
+                            new { songId = Model.Id },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "POST"
+                            }))
+            {
+                <input type="submit" class="btn btn-warning" value="Unfavorite" />
+            }
+        }
+    </div>
+    
+    <div class="col-md-6" style="padding-bottom:10px">
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "EditSong", "Song", new { songId = Model.Id }, new { @class = "btn btn-warning" })
+        }
+    </div>
 
-    @* Fix random empty if by addind logic to the others with && *@
-    @if (User.Identity.IsAuthenticated && !Model.Users.Contains(User.Identity.Name))
-    {
-        using (Ajax.BeginForm(
-                "AddToFavorites",
-                "Song",
-                new { songId = Model.Id },
-                new AjaxOptions
-                {
-                    HttpMethod = "POST"
-                }))
+    <div class="col-md-6" style="padding-bottom:10px">
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
-            <input type="submit" class="btn btn-success" value="Favorite" />
+            using (Html.BeginForm("DeleteSong", "Song", new { songId = Model.Id }, FormMethod.Post))
+            {
+                <input type="submit" class="btn btn-danger" value="Delete" />
+            }
         }
-    }
-    else if(User.Identity.IsAuthenticated && Model.Users.Contains(User.Identity.Name))
-    {
-        using (Ajax.BeginForm(
-                        "RemoveFromFavorites",
-                        "Song",
-                        new { songId = Model.Id },
-                        new AjaxOptions
-                        {
-                            HttpMethod = "POST"
-                        }))
-        {
-            <input type="submit" class="btn btn-warning" value="Unfavorite" />
-        }
-    }
-
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Edit", "EditSong", "Song", new { songId = Model.Id }, new { @class = "btn btn-warning" })
-    }
-
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        using (Html.BeginForm("DeleteSong", "Song", new { songId = Model.Id }, FormMethod.Post))
-        {
-            <input type="submit" class="btn btn-danger" value="Delete" />
-        }
-    }
+    </div>    
 </div>

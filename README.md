@@ -1,7 +1,7 @@
 # Reverb-MVC
 ##### (aka Rock-Metal-MVC)
 
-*A music site that offers information about songs. Add new songs and then listen to them. (gasp) *
+*A music site that offers information about songs. Add new songs and then listen to them. (gasp)*
 
 ### 1. Administrative functionality:
 

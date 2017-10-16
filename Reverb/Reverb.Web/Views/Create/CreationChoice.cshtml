@@ -1,7 +1,12 @@
-﻿@Html.ActionLink("Song", "CreateSong", "Create", null, new { @class = "btn btn-primary"})
-<br />
-@Html.ActionLink("Album", "CreateAlbum", "Create", null, new { @class = "btn btn-primary" })
-<br />
-@Html.ActionLink("Artist", "CreateArtist", "Create", null, new { @class = "btn btn-primary" })
-<br />
-@Html.ActionLink("Genre", "CreateGenre", "Create", null, new { @class = "btn btn-primary" })
+﻿<nav class="navbar navbar-custom">
+    <div class="container">
+        <div class="collapse navbar-collapse navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Song", "CreateSong", "Create")</li>
+                <li>@Html.ActionLink("Album", "CreateAlbum", "Create")</li>
+                <li>@Html.ActionLink("Artist", "CreateArtist", "Create")</li>
+                <li>@Html.ActionLink("Genre", "CreateGenre", "Create")</li>
+            </ul>
+        </div>
+    </div>
+</nav>

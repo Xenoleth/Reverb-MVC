@@ -1,72 +1,78 @@
 ﻿@using Reverb.Web.Models.Song
 @model SongViewModel
 
-@using (Html.BeginForm("EditSong", "Song", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <h4>Edit song details</h4>
-    <hr />
-    @Html.HiddenFor(x => x.Id)
-    <div class="form-group">
-        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EditorFor(x => Model.Title, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+<section id="contact">
+    <div class="container content-section text-center">
+        <div class="row">
+            @using (Html.BeginForm("EditSong", "Song", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Edit song details</h4>
+                <hr />
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(x => Model.Title, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Album, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Artist, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.VideoUrl, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(x => x.VideoUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CoverUrl, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(x => x.CoverUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Duration, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(x => x.Duration, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Genres, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.ListBoxFor(x => x.Genres, Model.AllGenres.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Lyrics, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(x => x.Lyrics, new { @class = "form-control", @style = "margin-bottom:15px;" })
+                    </div>
+                </div>
+                @Html.HiddenFor(x => x.Users)
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-3">
+                        <input type="submit" class="btn btn-success" value="Save" style = "width: 100%"/>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Album, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(x => x.Album, Model.AllAlbums.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Artist, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(x => x.Artist, Model.AllArtists.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.VideoUrl, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EditorFor(x => x.VideoUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.CoverUrl, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EditorFor(x => x.CoverUrl, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Duration, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EditorFor(x => x.Duration, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom:15px;" } })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Genres, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.ListBoxFor(x => x.Genres, Model.AllGenres.Select(x => new SelectListItem() { Text = x, Value = x }), new { @class = "form-control", @style = "margin-bottom:15px;" })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Lyrics, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(x => x.Lyrics, new { @class = "form-control", @style = "margin-bottom:15px;" })
-        </div>
-    </div>
-    @Html.HiddenFor(x => x.Users)
-    <br />
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-success" value="Save" />
-        </div>
-    </div>    
-}
+</section>

@@ -1,33 +1,30 @@
 ﻿@using Reverb.Web.Models.Song
 @model SongViewModel
 
-@*
-    TODO: Create better card for songs
-*@
-<div class="col-md-6 col-md-offset-1" style="width:270px; min-height:450px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4); border-radius: 5px; margin-top: 20px; margin-right: 20px">
+<div class="col-md-6 col-md-offset-1" style="width:270px; min-height:450px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4); border-radius: 5px; margin-top: 20px; margin-right: 20px; padding-right: 0;">
     <div class="image" style=" margin-left: -15px">
         <img alt="cover-image" src=@Model.CoverUrl width="270" style="padding-bottom:10px; border-radius: 5px 5px 0 0;" />
     </div>
 
-    <div class="col-md-5" style="padding-bottom:10px"><b>Title</b></div>
-    <div class="col-md-7" style="padding-bottom:10px">@Model.Title</div>
-    <div class="col-md-5" style="padding-bottom:10px"><b>Album</b></div>
-    <div class="col-md-7" style="padding-bottom:10px">@Model.Album</div>
-    <div class="col-md-5" style="padding-bottom:10px"><b>Artist</b></div>
-    <div class="col-md-7" style="padding-bottom:10px">@Model.Artist</div>
-    <div class="col-md-5" style="padding-bottom:10px"><b>Duration</b></div>
-    <div class="col-md-7" style="padding-bottom:10px">
+    <div class="col-md-4 text-left" style="padding-bottom:10px"><b>Title</b></div>
+    <div class="col-md-8 text-left" style="padding-bottom:10px">@Model.Title</div>
+    <div class="col-md-4 text-left" style="padding-bottom:10px"><b>Album</b></div>
+    <div class="col-md-8 text-left" style="padding-bottom:10px">@Model.Album</div>
+    <div class="col-md-4 text-left" style="padding-bottom:10px"><b>Artist</b></div>
+    <div class="col-md-8 text-left" style="padding-bottom:10px">@Model.Artist</div>
+    <div class="col-md-4 text-left" style="padding-bottom:10px"><b>Duration</b></div>
+    <div class="col-md-8 text-left" style="padding-bottom:10px">
         @if (Model.Duration != null)
         {
             @(String.Format("{0}:{1:00} min", (int)Model.Duration / 60, (int)Model.Duration % 60))
         }
         else
         {
-            <p>Unknown</p>
+            <div class="col-md-8 text-left" style="padding-bottom:10px">Unknown</div>
         }
     </div>
 
-    <div class="col-md-6" style="padding-bottom:10px">
+    <div class="col-md-6" style="padding-bottom:10px;">
         @if (User.Identity.IsAuthenticated)
         {
             using (Ajax.BeginForm(
@@ -39,7 +36,7 @@
                         HttpMethod = "POST"
                     }))
             {
-                <input type="submit" class="btn btn-primary" value="Details" />
+                <input type="submit" class="btn btn-primary" value="Details" style = "width: 100px" />
             }
         }
     </div>
@@ -56,7 +53,7 @@
                         HttpMethod = "POST"
                     }))
             {
-                <input type="submit" class="btn btn-success" value="Favorite" />
+                <input type="submit" class="btn btn-success" value="Favorite" style = "width: 100px"/>
             }
         }
         else if (User.Identity.IsAuthenticated && Model.Users.Contains(User.Identity.Name))
@@ -70,24 +67,28 @@
                                 HttpMethod = "POST"
                             }))
             {
-                <input type="submit" class="btn btn-warning" value="Unfavorite" />
+                <input type="submit" class="btn btn-warning" value="Unfave" style = "width: 100px" />
             }
+        }
+        else
+        {
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
         }
     </div>
     
-    <div class="col-md-6" style="padding-bottom:10px">
+    <div class="col-md-6" style="padding-bottom:10px;">
         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
-            @Html.ActionLink("Edit", "EditSong", "Song", new { songId = Model.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Edit", "EditSong", "Song", new { songId = Model.Id }, new { @class = "btn btn-warning", @style = "width: 100px" })
         }
     </div>
 
-    <div class="col-md-6" style="padding-bottom:10px">
+    <div class="col-md-6" style="padding-bottom:10px; width: 100px;">
         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
             using (Html.BeginForm("DeleteSong", "Song", new { songId = Model.Id }, FormMethod.Post))
             {
-                <input type="submit" class="btn btn-danger" value="Delete" />
+                <input type="submit" class="btn btn-danger" value="Delete" style = "width: 100px"/>
             }
         }
     </div>    

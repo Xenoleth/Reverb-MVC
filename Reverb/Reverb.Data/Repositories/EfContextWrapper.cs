@@ -15,7 +15,7 @@ namespace Reverb.Data.Repositories
 
         public EfContextWrapper(IReverbDbContext context)
         {
-            Guard.WhenArgument(context, "context").IsNull().Throw();
+            //Guard.WhenArgument(context, "context").IsNull().Throw();
 
             this.context = context;
         }

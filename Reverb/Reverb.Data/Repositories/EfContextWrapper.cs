@@ -1,5 +1,4 @@
-﻿using Bytes2you.Validation;
-using Reverb.Data.Contracts;
+﻿using Reverb.Data.Contracts;
 using Reverb.Data.Models.Contracts;
 using System;
 using System.Data.Entity;
